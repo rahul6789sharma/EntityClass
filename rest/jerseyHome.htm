@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+					<meta property="og:site_name" content="www.entityclass.in" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta name="author" content="entityclass.in">
+
+<meta property="og:title" content="Rest Tutorial | Jersey | RestEsy| JAX-RS"/>
+
+<meta property="og:url" content="http://www.entityclass.in/rest/jerseyHome.htm" />
+<meta property="og:description" content="First hello world Festful Web Service that uses jeresy "/>
+    
+	
+	
+    <title>REST Example - Hello Web Service</title>
+
+    <meta name="keywords" content="Entity Class, REST tutorial, Beginner REST tutorial, JERSEY Example, REST-RS (Jersey)" />
+    <meta name="description" content="First hello world Festful Web Service that uses jeresy  " />
+    <meta name="robots" content="index, follow">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../img/EcLogo.png">
+
+    <script type="text/javascript" src="../js/shCore.js"></script>
+    <script type="text/javascript" src="../js/shBrushJava.js"></script>
+    <script type="text/javascript" src="../js/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../css/shCoreDefault.css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+
+    </script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/entityClass.js"></script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+</head>
+
+<body ng-app="">
+
+    <div style="margin-bottom:5%;">
+        <div ng-include="'../pages/header.htm'"></div>
+    </div>
+
+
+    <div class="container-fluid" style="padding-right:0px; padding-left:0px">
+
+        <!--left-->
+        <div class="col-xs-12 col-sm-3 col-md-3 " style="padding-left:4px ; padding-right:2px">
+            <div class="panel-group">
+                <div class="panel panel-default">
+
+                    <div class="panel-heading"><strong>REST</strong></div>
+                    <div class="panel-body">
+   	                        <div id="leftMenu">						
+					         </div>                   
+                    </div>
+                </div>
+
+                <div ng-include="'../pages/fb.htm'"></div>
+            </div>
+
+
+        </div>
+        <!--/left-->
+
+        <!--center-->
+        <div class="col-xs-12 col-sm-6  col-md-6" style="padding-left:2px ; padding-right:2px ">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+
+                        <div class="panel-body">
+                            <div class="mainParaHeding"> REST Example - Hello Web Service</div>
+                            <h1 style="display: none;"> REST Example - Hello Web Service</h1>
+                            <hr class="mainHeading">
+
+                            <p>
+                                <a href="https://jersey.java.net/" class="myancor" target="_blank"> Jersey </a>is the implementation to develop RESTful web service based on
+                                <a href="https://jax-rs-spec.java.net/" class="myancor" target="_blank">  JAX-RS</a> (JSR 311) specification.
+                            </p>
+                            <p>
+                                We will develop a simple hello world REST web application with Jersey and deploy on tomcat server
+                            </p>
+
+                            <p>
+                                Technologies and Tools used to develop restful web service
+                                <ol>
+                                    <li>JDK 1.7</li>
+                                    <li>Jersey 1.8</li>
+                                    <li>Tomcat 7</li>
+                                    <li>Maven 3.1.1</li>
+                                    <li>Eclipse Luna</li>
+                                </ol>
+                            </p>
+                            <br/>
+
+                            <p>
+                                <strong>1. Generate Maven Web Project Using Command Line </strong>
+                                <div class="command">
+                                    mvn archetype:generate -DgroupId=com.techtutorial.rest -DartifactId=RestHelloDemo -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+                                </div>
+                            </p>
+                            <p><strong> OR : Create Maven Project Using Eclipse</strong></p>
+                            <p>Open Eclipse Go to <strong> File->New->Maven Project </strong> </p>
+                            <p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/mavenNew.png" alt="mavenNew" title="jersey-hello-world">
+                                </div>
+                            </p>
+                            <p>Click next and provide the details of you project</p>
+                            <p>Select the webApp type Maven project and click next</p>
+                            <p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/mavenWeb.png" alt="mavenWeb" title="jersey-hello-world">
+                                </div>
+                            </p>
+                            <p> Provide the Group Id and Artifact Id and click on finish . This will create Maven project directly in Eclipse</p>
+                            <p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/mavenDetails.png" alt="mavenDetails" title="jersey-hello-world">
+                                </div>
+                            </p>
+
+                            <br/>
+                            <p>
+                                <strong>2. Import Project Into Eclipse </strong>
+                                <p><strong> Note: </strong>This step is not required if you have created Maven project using Eclipse</p>
+                            </p>
+                            <p>
+                                Import generated project into eclipse as Existing Maven Projects
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/importMavenProject.png" alt="importEclipse" title="jersey-hello-world">
+                                </div>
+
+                            </p>
+                            <br/>
+
+                            <p>
+                                <strong>3.  Directory Structure Of Project </strong>
+                            </p>
+                            <p>
+                                <strong>Note:</strong> Inside main directory create java directory and delete index.jsp from webapp directory
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/dirStructure.png" alt="dirStructor" title="jersey-hello-world" style="padding-left:15%;">
+                                </div>
+
+                            </p>
+
+                            <br/>
+                            <p>
+                                <strong>4. POM.xml:Project Dependencies </strong>
+                            </p>
+
+                            <p>
+                                Open the pom.xml file and the add the Jersey dependency to dependencies Section
+
+                            </p>
+                            <p>In this demo we are using jersey server 1.8 version</p>
+                            <p>
+                                <div class="command">
+                                    <pre class="brush: xml; gutter: false;" style=" overflow-y: hidden !important; ">
+<project ...>
+	<dependencies>
+	
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>1.8</version>
+		</dependency>
+
+	</dependencies>
+	
+</project>
+</pre>
+
+                                </div>
+                            </p>
+                            </br>
+							
+                            <p>
+                                <strong> 5. Create REST Service Class  </strong>
+                            </p>
+                            <p>
+                                Inside JAVA directory Create Rest Service HelloRestClassService
+                            </p>
+
+                            <div class="command">
+                                <pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+package com.techtutorial.rest;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
+
+
+@Path("/hello")
+public class HelloRestService {
+	
+	@GET
+	@Path("/{param}")
+	public Response getMsg(@PathParam("param") String msg) {
+ 
+		String output = "Welcome by Jersey : " + msg;
+ 
+		return Response.status(200).entity(output).build();
+ 
+	}
+
+}
+
+</pre>
+
+                            </div>
+                            <br/>
+
+
+                            <p>
+                                <strong>6. Edit web.xml </strong>
+                            </p>
+                            <p>
+                                You need to create a Web xml Configuration file which is an XML file and is used to specify Jersey framework servlet for our application.
+                            </p>
+                            <p>
+                                In web.xml, register “com.sun.jersey.spi.container.servlet.ServletContainer“, and puts your Jersey service folder under “init-param“, “com.sun.jersey.config.property.packages“.
+                            </p>
+							<p>"com.sun.jersey.config.property.packages" Tells Jersey what package to scan for your @Path classes and register those classes.</p>
+                            <p>
+
+                                <div class="command">
+                                    <pre class="brush: xml; gutter: false;" style=" overflow-y: hidden !important; ">
+		
+<web-app>
+  <display-name>Restful first Web Application</display-name>
+  
+  	<servlet>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<servlet-class>
+            com.sun.jersey.spi.container.servlet.ServletContainer
+        </servlet-class>
+		<init-param>
+		     <param-name>
+			 com.sun.jersey.config.property.packages
+			 </param-name>
+		     <param-value>
+			 com.techtutorial.rest
+			 </param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+    <servlet-name>jersey-serlvet</servlet-name>
+      <url-pattern>/rest/*</url-pattern>
+   </servlet-mapping>
+	
+</web-app>
+		</pre>
+                                </div>
+
+
+                            </p>
+
+                            <p><strong> Note: </strong>As you can see our servlet is mapped to /rest/ URI pattern. So the basic structure of the URIs to reach the REST Services used in this example will have the form</p>
+                            <p> http://localhost:8080/RestHelloDemo/rest/.. </p>
+                            <p>
+                                </br>
+                                <strong>7. Demo </strong>
+                            </p>
+                            <p>
+                                URL: <strong> http://localhost:8080/RestHelloDemo/rest/hello/Hello </strong>
+                            </p>
+                            <p>
+                                In this example, web request from “projectURL/rest/hello/” will match to "HelloRestService", via @Path("/hello").
+                            </p>
+                            <p>
+                                And the “{any values}” from “projectURL/rest/hello/{any values}” will match to parameter annotated with @PathParam
+                            </p>
+                            <div class="imgBox">
+                                <img class="img-responsive" src="img/restDemo.png" alt="dirStructor" title="jersey-hello-world" style="padding-left:1%;">
+                            </div>
+
+                            <br/>
+
+                            <p><strong>Download This Project</strong></p>
+                            <p> You can import the Rest Project as maven project in eclipse.
+                            </p>
+                            <p> or you can directly use maven commend to build the war file and deploy on tomcat server.
+                            </p>
+                            <p>Go to project directory "RestHelloDemo" and run mvn commend as: this will create target folder and generate war file</p>
+                            <p>
+                                <div class="command">
+                                    mvn clean install
+                                </div>
+                            </p>
+                            <a target="_self" href="../SampleCodes/RestDemo/RestHelloDemo.zip">
+                                <button type="button" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-download-alt">
+		  </span> &nbsp; RestHelloDemo.zip &nbsp;
+                                </button>
+                            </a>
+
+                            <p>
+                                <ul class="pager">
+                                    <li class="previous"><a href="jaxRX.htm">Previous</a></li>
+                                    <li class="next"><a href="jerseyJSON.htm">Next</a></li>
+                                </ul>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+
+
+            <hr>
+
+        </div>
+        <!--/center-->
+
+        <!--right-->
+        <div class="col-xs-5 col-sm-3  col-md-3" style="padding-left:2px ; padding-right:2px">
+            <div>
+                
+ <div ng-include="'../pages/rightPannel.htm'"></div>
+
+
+
+
+            </div>
+        </div>
+        <!--/right-->
+       
+    </div>
+    <!--/container-fluid-->
+
+    <div id="footer">
+        <div ng-include="'../pages/footer.html'"></div>
+    </div>
+
+    <!-- Bootstrap Core JavaScript -->
+
+    
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/myNoteApp.js"></script>
+    <script src="../js/myNoteCtrl.js"></script>
+
+
+
+</body>
+
+</html>

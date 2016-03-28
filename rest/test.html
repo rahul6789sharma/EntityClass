@@ -1,0 +1,75 @@
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>REST</title>
+
+
+         <link rel="stylesheet" href="../css/style.css">
+
+
+
+    </head>
+
+    <body >
+
+
+                    <pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+    package com.techtutorial.rest;
+
+    import java.util.ArrayList;
+    import java.util.List;
+
+    public class StudentDao {
+
+        public Student getStudent() {
+
+            Student std = new Student();
+            std.setName("Jami");
+            std.setAddress("India");
+            std.setId(1);
+
+            return std;
+
+        }
+
+        public List<Student> getStudents(){
+
+            List<Student> stdList = new ArrayList<Student>();
+
+            Student std1 = new Student();
+            std1.setName("Jami");
+            std1.setAddress("India");
+            std1.setId(1);
+
+            Student std2 = new Student();
+            std2.setName("Kami");
+            std2.setAddress("USA");
+            std2.setId(2);
+
+            stdList.add(std1);
+            stdList.add(std2);
+
+            return stdList;
+
+        }
+    }
+    </pre>
+
+
+
+      <script type="text/javascript" src="../js/shCore.js"></script>
+        <script type="text/javascript" src="../js/shBrushJava.js"></script>
+        <script type="text/javascript" src="../js/shBrushXml.js"></script>
+        <link type="text/css" rel="stylesheet" href="../css/shCoreDefault.css"/>
+        <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+
+    </body>
+
+    </html>

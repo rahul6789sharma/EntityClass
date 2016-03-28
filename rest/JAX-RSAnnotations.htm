@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		
+				<meta property="og:site_name" content="www.entityclass.in" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta name="author" content="entityclass.in">
+
+<meta property="og:title" content="Rest Tutorial | Jersey | RestEsy| JAX-RS"/>
+
+<meta property="og:url" content="http://www.entityclass.in/rest/JAX-RSAnnotations.htm" />
+<meta property="og:description" content="JAX-RS - Annotations Explain Most of common Annotations used to develop Restful webService. "/>
+    
+	
+    <title>REST Example - Produce XML : REST-RS (Jersey) + JAXB </title>
+
+    <meta name="keywords" content="Entity Class, REST tutorial, beginner REST tutorial, JERSEY , RestEasy, REST-RS (Jersey) + JAXB, Produce xml" />
+    <meta name="description" content="Using Jersey and JAXB to create restful service that will produce xml as response." />
+    <meta name="robots" content="index, follow">
+
+
+    <script type="text/javascript" src="../js/shCore.js"></script>
+    <script type="text/javascript" src="../js/shBrushJava.js"></script>
+    <script type="text/javascript" src="../js/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../css/shCoreDefault.css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+
+    </script>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../img/EcLogo.png">
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/entityClass.js"></script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<style>
+table {
+    width:100%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+tr:nth-child(odd) {
+   background-color:#fff;
+}
+ th	{
+    background-color: #bfbfbf;
+    color: Black;
+}
+</style>
+</head>
+
+<body ng-app="">
+
+    <div style="margin-bottom:5%;">
+        <div ng-include="'../pages/header.htm'"></div>
+    </div>
+
+
+    <div class="container-fluid" style="padding-right:0px; padding-left:0px">
+
+        <!--left-->
+        <div class="col-xs-12 col-sm-3 col-md-3 " style="padding-left:4px ; padding-right:2px">
+            <div class="panel-group">
+                <div class="panel panel-default">
+
+                    <div class="panel-heading"><strong>REST</strong></div>
+                    <div class="panel-body">
+
+                        <div id="leftMenu">						
+					         </div>
+
+                 
+                    </div>
+
+
+                </div>
+
+                <div ng-include="'../pages/fb.htm'"></div>
+            </div>
+
+
+
+        </div>
+        <!--/left-->
+
+        <!--center-->
+        <div class="col-xs-12 col-sm-6  col-md-6" style="padding-left:2px ; padding-right:2px ">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+
+                        <div class="panel-body">
+                           <div class="mainParaHeding"> JAX-RS - Annotations </div>
+                            <h1 style="display: none;"> JAX-RS - Annotations </h1>
+                            <hr class="mainHeading">
+
+  <p>
+                                    
+                                <a href="https://jax-rs-spec.java.net/" class="myancor"  target="_blank">  JAX-RS</a> (JSR 311) is the specification to develop RESTful web service.
+								JAX-RS stands for JAVA API for RESTful Web Services.Its 2.0 version was released in 24 May 2013.
+								In this tutorial we will use <a href="https://jersey.java.net/" class="myancor"  target="_blank"> Jersey </a>as implementation of JAX-RS specification.
+                            </p>
+                            <p>
+							Below are the most commonly used annotations that are used to map a resource as a web service resource.
+							
+                            </p>
+							<p>
+							REST follows one-to-one mapping between create, read, update, and delete (CRUD) operations and HTTP methods.
+							<ul>
+							<li>To create a resource on the server, use POST.</li>
+							<li>To retrieve a resource, use GET.</li>
+							<li>To change the state of a resource or to update it, use PUT.</li>
+							<li>To remove or delete a resource, use DELETE.</li>
+							
+							</ul>
+							</p>
+				  <p>
+				  
+				  <table>
+  <tr>
+    <th>Annotation</th>
+    <th>Description</th>		
+  </tr>
+  
+  <tr>
+    <td> <strong> @path </strong> </td>
+    <td>
+	Define relative URI path of the resource.
+	It can be specified on class or method
+	</td>		
+  
+  </tr>
+  
+  <tr>
+    <td><strong> @GET</strong></td>
+    <td>Define method that responds to GET HTTP request.
+	commonly used to fetch resource.
+	</td>		
+  
+  </tr>
+  
+  <tr>
+    <td><strong> @PUT </strong></td>
+    <td>Define method that responds to PUT HTTP request.
+	commonly used to create resource.</td>		
+  
+  </tr>
+  
+    <tr>
+    <td><strong> @POST </strong></td>
+    <td>Define method that responds to POST HTTP request.
+	commonly used to create/update resource.
+	</td>		
+  
+  </tr>
+  
+    <tr>
+    <td><strong>@DELETE</strong></td>
+    <td>Define method that responds to DELETE HTTP request.
+	commonly used to delete resource.
+	</td>		
+  
+  </tr>
+    <tr>
+    <td><strong> @HEAD </strong></td>
+    <td>Define method that responds to HEAD HTTP request.
+	commonly used to get status of method availability.
+	</td>		
+  
+    <tr>
+    <td><strong> @Produces </strong></td>
+    <td>Specify the MIME media types of a resource that can be produce and send back to the client by web service.
+        such as APPLICATION/XML, TEXT/HTML, APPLICATION/JSON etc.
+	</td>		
+  
+  </tr>
+    <tr>
+    <td><strong> @Consumes </strong></td>
+    <td>Specify the MIME media types that can be consumed/accepted by a resource during POST request.
+	 such as APPLICATION/XML, TEXT/HTML, APPLICATION/JSON etc.</td>		
+  
+  </tr>
+    <tr>
+    <td><strong> @PathParam </strong></td>
+    <td>Bind REST-style URI parameters to method arguments</td>		
+  
+  </tr>
+  
+
+    </tr>
+    <tr>
+    <td><strong> @QueryParam </strong></td>
+    <td>
+	Request parameters in query string of URI and passed to a method arguments.
+	</td>		
+  
+  </tr>
+  
+    
+   </tr>
+    <tr>
+    <td><strong> @FormParam </strong></td>
+    <td>Used to read parameters sent in POST requests directly </td>		
+  
+  </tr>
+  
+    <tr>
+    <td><strong> @MatrixParam </strong></td>
+    <td>Doe</td>		
+  
+  </tr>
+  
+   </tr>
+    <tr>
+    <td><strong> @HeaderParam </strong></td>
+    <td>Doe</td>		
+  
+  </tr>
+  
+  
+   </tr>
+    <tr>
+    <td><strong> @CookieParam</strong></td>
+    <td>Doe</td>		
+  
+  </tr>
+
+  
+   </tr>
+    <tr>
+    <td><strong> @DefaultValue </strong></td>
+    <td>Doe</td>		
+  
+  </tr>
+  
+   </tr>
+    <tr>
+    <td><strong> @Context</strong></td>
+    <td>Doe</td>		
+  
+  </tr>
+  
+  
+</table>
+				  </p>
+			
+                            <p>
+                                <ul class="pager">
+                                    <li class="previous"><a href="jerseyClientGetXml.htm">Previous</a></li>
+                                    <li class="next"><a href="RestEasyHelloWorld.htm">Next</a></li>
+                                </ul>
+                            </p>
+	  
+
+
+            <hr>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                 * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                 */
+
+                var disqus_config = function() {
+                    this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = 10; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document,
+                        s = d.createElement('script');
+
+                    s.src = '//entityclass.disqus.com/embed.js';
+
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+
+            </script>
+
+            <hr>
+
+
+
+        </div>
+        <!--/center-->
+
+        <!--right-->
+        <div class="col-xs-5 col-sm-3  col-md-3" style="padding-left:2px ; padding-right:2px">
+            <div>
+ <div ng-include="'../pages/rightPannel.htm'"></div>
+
+
+
+            </div>
+        </div>
+        <!--/right-->
+       
+    </div>
+    <!--/container-fluid-->
+
+    <div id="footer">
+        <div ng-include="'../pages/footer.html'"></div>
+    </div>
+
+    <!-- Bootstrap Core JavaScript -->
+
+    
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/myNoteApp.js"></script>
+    <script src="../js/myNoteCtrl.js"></script>
+
+
+
+</body>
+
+</html>

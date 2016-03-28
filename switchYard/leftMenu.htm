@@ -1,0 +1,39 @@
+
+   <script> 
+   
+   $(function(){
+	  var pagepath =window.location.pathname.split("/");
+	  var fullpagename = pagepath.pop();
+	  var z= fullpagename.split("."); 
+	  var pageName = z[0];
+	  var a= document.getElementById(pageName);
+	  a.className= 'leftMenuActive';
+   });
+    </script>
+	
+	<!-- id of a tag should be page name -->
+	   <nav id="navigation">
+                            <ul style="padding-left:0%;">
+                                <div class="listHeading">INTRODUCTION TO SwitchYard </div>
+                                <div style="">
+                                    <a class="leftMenulink" href="SYRunTimeSetUp.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li id="SYRunTimeSetUp" class="leftMenuinActive" >Environment SetUp For SwitchYard</li>
+                                        </div>
+                                    </a>
+                                    <a class="leftMenulink" href="SYEclipseProject.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li id="SYEclipseProject" class="leftMenuinActive">SwitchYard Hello World Service</li>
+                                        </div>
+                                    </a>
+									
+									  <a class="leftMenulink" href="SYScaBinding.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li id="SYScaBinding" class="leftMenuinActive">SCA Binding</li>
+                                        </div>
+                                    </a>
+                                
+                                </div>
+                            </ul>
+    						
+                        </nav>

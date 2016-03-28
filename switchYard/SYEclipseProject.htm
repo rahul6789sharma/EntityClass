@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta property="og:site_name" content="www.entityclass.in" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta name="author" content="entityclass.in">
+
+<meta property="og:title" content="SwitchYard Tutorial | SwitchYard "/>
+
+<meta property="og:url" content="http://www.entityclass.in/switchYard/SYEclipseProject.htm" />
+<meta property="og:description" content="First SwitchYard Service"/>
+    
+	
+	
+    <title>SwitchYard Hello World Service</title>
+
+    <meta name="keywords" content="Entity Class,SwitchYard, Jboss SwitchYard, SwitchYard Tutorials, Learn SwitchYard, Hello World SwitchYard Project,
+	JBoss FSW, JBoss Fuse Service Work" />
+    <meta name="description" content="First SwitchYard Service," />
+    <meta name="robots" content="index, follow">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../img/EcLogo.png">
+
+    <script type="text/javascript" src="../js/shCore.js"></script>
+    <script type="text/javascript" src="../js/shBrushJava.js"></script>
+    <script type="text/javascript" src="../js/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../css/shCoreDefault.css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+
+    </script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/entityClass.js"></script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+</head>
+
+<body ng-app="">
+    <div style="margin-bottom:5%;">
+        <div ng-include="'../pages/header.htm'">
+		</div>
+
+    </div>
+    <div class="container-fluid" style="padding-right:0px; padding-left:0px">
+        <!--left-->
+        <div class="col-xs-12 col-sm-3 col-md-3 " style="padding-left:4px ; padding-right:2px">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>SwitchYard</strong></div>
+                    <div class="panel-body">
+                        
+                            
+							<div id="leftMenu">						
+					         </div>
+			
+                    </div>
+                </div>
+                <div ng-include="'../pages/fb.htm'"></div>
+            </div>
+        </div>
+        <!--/left-->
+        <!--center-->
+        <div class="col-xs-12 col-sm-6  col-md-6" style="padding-left:2px ; padding-right:2px ">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="mainParaHeding">SwitchYard Hello World Service</div>
+                            <h1 style="display: none;">SwitchYard Hello World Service</h1>
+                            <hr class="mainHeading">
+                           
+							<p>A SwitchYard project is a Maven based project. The Eclipse tooling supports the creation of new SwitchYard projects.</p>
+							<ul>
+							<li>
+							A <strong>switchyard.xml</strong> file in the project's META-INF folder
+							</li>
+							<li>SwitchYard runtime dependencies declared in the pom.xml file</li>
+				           </ul>
+						 
+						 <p><strong>Creating a New SwitchYard Project in Eclipse</strong></p>
+						 <p> Open Eclipse Go to <strong>File->New->Other->SwitchYard Project</strong>  </strong></p>
+						
+						<p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/OpenFile.png" alt="OpenFile" title="OpenFile">
+                                </div>
+                            </p>
+							<p> The New Dialog appears, Select SwitchYard Project and click next.</p>
+						 <p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/SYNewProject.png" alt="SYNewProject" title="SYNewProject">
+                                </div>
+                            </p>
+						 
+						 <p>Give the project name and Click Next: </p>
+						 
+						  <p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/NewSYHelloWordProject.png" alt="NewSYHelloWordProject" title="NewSYHelloWordProject">
+                                </div>
+                            </p>
+							
+						<p>Configure the SwitchYard component:</p>
+						<p>Select Implementation support as Bean  and Binding as SCA and REST. We will discuss more about switchYard components in next tutorials .</p>
+						<p>SwitchYard components can be added after creation of project also.</p>
+						 
+						
+						  <p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/SYProjectConfig.png" alt="SYProjectConfig" title="SYProjectConfig">
+                                </div>
+                            </p>
+							<p>
+							Below is a description of input filed on this dialog
+							<ol>
+							<li><strong> Artifact Id </strong>: The Maven artifact id for this project.</li>
+							<li><strong> Group Id </strong>: The Maven group id for this project.</li>
+							<li><strong> Target Namespace </strong>: The XML namespace that will be used to reference the SwitchYard application.</li>
+							<li><strong> Package Name</strong>: Default package name for any generated classes, interfaces, and resources.</li>
+							<li><strong> Runtime Version</strong>: SwitchYard dependency version to be used for all SwitchYard dependencies.
+							Enterprise versions always end in -redhat-# e.g <strong> 1.1.1.p5-redhat-1.</strong> For compatibility sake, you should pick the version
+							number deployed in Jboss EAP. This version number can be found by looking at s SwitchYard module such as 
+							<strong>$JBOSS_HOME/modules/system/layers/soa/org/switchyard/api/main </strong>.
+							
+							</li>
+							
+							<li><strong> Components </strong>:If the developer knows which implementation types, binding, and/or test mixins they will be 
+							using, they can be preselected here. The corresponding Maven dependencies will be added to the project definition.  This can be added latter also 
+							project.</li>
+							</ol>
+							</p>
+							 <p>Click Finish. The wizard will generate a Maven project and will display a blank composite canvas in the SwitchYard digram editor.</p>
+							 
+							   <p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/SYFinalEclipseProject.png" alt="SYFinalEclipseProject" title="SYFinalEclipseProject">
+                                </div>
+                            </p>
+							
+							<p>Now we will create Service component (HelloWorldServiceBean Java Service Component), here we are creating Java bean service. Drag the Bean Implementation widget from the Pallet on to the canvas. </p>
+							
+							
+							<p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/SYHelloWorldBeanService.png" alt="SYHelloWorldBeanService" title="SYHelloWorldBeanService">
+                                </div>
+                            </p>
+							<p>A <strong>New Bean Service </strong> dialog will be displayed. Enter the information</p></br>
+							<strong>Package Name </strong>: it will be by default filled for you , you can change the package.</br>
+							<strong>Service Name</strong> : HelloWorldService (note it will add bean in Bean when you will create interface for this service).</br>
+							<strong>Interface</strong>: Click the Interface link. the New Java Interface dialog will appear, enter "HelloWorldService" in the name filed and click Finish.
+							<p>
+							<p>
+							Note :This will generate "HelloWorldService" Java interface and "HelloWorldServiceBean" java class that implements "HelloWorldService" interface</p>
+							</p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/SYHelloWorldBeanServiceCanvas.png" alt="SYHelloWorldBeanServiceCanvas" title="SYHelloWorldBeanServiceCanvas">
+                                </div>
+                            </p>
+							<p> Now We will start writing java methods inside interfaces and class. </p>
+							<p>Double-click the little green chevron or open the <strong>"HelloWorldService"</strong> interface for editing. </p>
+							<p>Create interface method <strong>"getMessage(String msg)"</strong></p>
+							 <div class="command">
+                                <pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+package com.example.switchyard.switchyard_helloWord;
+
+public interface HelloWorldService {
+
+	public String getMessage(String msg);
+	
+}
+
+                                </pre>
+
+                            </div>
+							
+						<p>	On SwitchYard diagram , double-click the bean component (purple rectangle) or open the <strong>"HelloWorldServiceBean"</strong>
+							class for editing.
+						</p>
+						<p>Implement the <strong>"getMessage(String msg)"</strong> interface method.</p>
+							
+	<div class="command">
+                                <pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+package com.example.switchyard.switchyard_helloWord;
+
+import org.switchyard.component.bean.Service;
+
+@Service(HelloWorldService.class)
+public class HelloWorldServiceBean implements HelloWorldService {
+
+	@Override
+	public String getMessage(String msg) {
+		String result = "Hello by  SwitchYard  " + msg;
+		return result;
+	}
+	
+}
+                                </pre>
+
+                            </div>
+							<p>Save the diagram.</p>
+							
+							<p>Now we have component Service and we have to promote this as composite Service . <p>
+							<p>Hover over the little green chevron and pick the large green arrow(promote service).</p>
+							
+								<p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/SYPromoteService.png" alt="SYPromoteService" title="SYPromoteService">
+                                </div>
+                            </p>
+							<p>The <strong>Promote Component Service</strong> dialog appears</p>
+							<p>Take all defaults and Click finish. Save the diagram.<p>
+									<p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/SYPromoteServiceInterface.png" alt="SYPromoteServiceInterface" title="SYPromoteServiceInterface">
+                                </div>
+                            </p>
+										
+							<p>Now you have your <strong>HellowWorldServiceBean </strong>as SwitchYard composite Service.  </p>
+								
+							<p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/SYPromateServiceCanvas.png" alt="SYPromateServiceCanvas" title="SYPromateServiceCanvas">
+                                </div>
+                            </p>
+							<br/>
+							 <hr class="mainHeading">
+							<div class="mainParaHeding">Testing SwitchYard Hello World Project </div>
+                            <h1 style="display: none;">Testing SwitchYard Hello World Project</h1>
+                            <hr class="mainHeading">
+							<p> We will create JUnit test to test <strong> HellowWorldService </strong> composite service</p>
+							
+							<p> Hover over little green chevron  and click on <strong> New Service Test Class</strong> . The <strong> Service Test Class</strong>
+							dialog will appear.</p>
+							
+							<p>Accept all of the default and click on finish. The newly generated JUnit test class will be opened in an editor.</p>
+							
+							
+							<p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/SYJunitForHelloService.png" alt="SYJunitForHelloService" title="SYJunitForHelloService">
+                                </div>
+                            </p>
+							
+							<p>Customized the JUnit Test</p>
+							<p></p>
+							
+								<div class="command">
+                                <pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.switchyard.component.test.mixins.cdi.CDIMixIn;
+import org.switchyard.test.Invoker;
+import org.switchyard.test.ServiceOperation;
+import org.switchyard.test.SwitchYardRunner;
+import org.switchyard.test.SwitchYardTestCaseConfig;
+import org.switchyard.test.SwitchYardTestKit;
+
+@RunWith(SwitchYardRunner.class)
+@SwitchYardTestCaseConfig(config = SwitchYardTestCaseConfig.SWITCHYARD_XML, mixins = { CDIMixIn.class })
+public class HelloWorldServiceTest {
+
+	private SwitchYardTestKit testKit;
+	private CDIMixIn cdiMixIn;
+	@ServiceOperation("HelloWorldService")
+	private Invoker service;
+
+	@Test
+	public void testGetMessage() throws Exception {
+		
+		String message = "Test Hello Message";
+		String result = service.operation("getMessage").sendInOut(message)
+				.getContent(String.class);
+	
+		
+		System.out.println("Result : " + result);
+	
+		Assert.assertEquals("Hello by SwitchYard :Test Hello Message", result);
+		//Assert.assertTrue("Implement me", false);
+	}
+
+}
+                                </pre>
+
+                            </div>
+							
+							<p>Note that the service invoker was injected using CDI</p>
+							
+													<div class="command">
+                                <pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+								@ServiceOperation("HelloWorldService")
+	                            private Invoker service;
+                           </pre>
+	
+                            </div>
+							
+							<p>Run the Test</p>
+							<p>Right click in the<strong>HelloWorldServiceTest</strong> class and select <strong> Run As -> JUint Test.</strong> </strong> </p>
+							<p> After few moments, the test should complete with the test passing.</p>
+							
+							<p>In next tutorial we will bind our service with SCA. and see how we will call newly created service.</p>
+							
+							
+							
+							
+							         <p><strong>Download This Project</strong></p>
+                            <p> You can import the Rest Project as maven project in eclipse.
+                            </p>
+                            <p> or you can directly use maven command to build the war file and deploy on tomcat server.
+                            </p>
+                            <p>Go to project directory "switchyard-helloWord" and run mvn command as: this will create target folder and generate war file</p>
+                            <p>
+                                <div class="command">
+                                    mvn clean install
+                                </div>
+                            </p>
+                            <a target="_self" href="../SampleCodes/SwitchYardDemo/switchyard-helloWord.zip">
+                                <button type="button" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-download-alt">
+		  </span> &nbsp; switchyard-helloWord.zip &nbsp;
+                                </button>
+                            </a>
+							
+							
+                                <ul class="pager">
+                                    <li class="previous disabled"><a href="SYRunTimeSetUp.htm">Previous</a></li>
+                                    <li class="next"><a href="#">Next</a></li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <!--/center-->
+        <!--right-->
+        <div class="col-xs-12 col-sm-3  col-md-3" style="padding-left:2px ; padding-right:2px">
+            <div>
+ <div ng-include="'../pages/rightPannel.htm'"></div>
+
+
+
+            </div>
+        </div>
+        <!--/right-->
+       
+    </div>
+    <!--/container-fluid-->
+    <div id="footer">
+        <div ng-include="'../pages/footer.html'"></div>
+    </div>
+    <!-- Bootstrap Core JavaScript -->
+    
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/myNoteApp.js"></script>
+    <script src="../js/myNoteCtrl.js"></script>
+</body>
+
+</html>

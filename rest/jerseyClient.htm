@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>REST Example - Produce XML : REST-RS (Jersey) + JAXB </title>
+
+    <meta name="keywords" content="Entity Class, REST tutorial, beginner REST tutorial, JERSEY , RestEasy, REST-RS (Jersey) + JAXB, Produce xml" />
+    <meta name="description" content="Using Jersey and JAXB to create restful service that will produce xml as response." />
+    <meta name="robots" content="index, follow">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../img/EcLogo.png">
+
+    <script type="text/javascript" src="../js/shCore.js"></script>
+    <script type="text/javascript" src="../js/shBrushJava.js"></script>
+    <script type="text/javascript" src="../js/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../css/shCoreDefault.css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+
+    </script>
+
+
+
+</head>
+
+<body ng-app="">
+
+    <div style="margin-bottom:5%;">
+        <div ng-include="'../pages/header.htm'"></div>
+    </div>
+
+
+    <div class="container-fluid" style="padding-right:0px; padding-left:0px">
+
+        <!--left-->
+        <div class="col-xs-12 col-sm-3 col-md-3 " style="padding-left:4px ; padding-right:2px">
+            <div class="panel-group">
+                <div class="panel panel-default">
+
+                    <div class="panel-heading"><strong>REST</strong></div>
+                    <div class="panel-body">
+
+                        <nav id="navigation">
+                            <ul style="padding-left:0%;">
+
+
+                                <div class="listHeading">INTRODUCTION TO REST </div>
+
+                                <div>
+
+                                    <a class="leftMenulink" href="home.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li class="leftMenuinActive">What is Web Service</li>
+                                        </div>
+                                    </a>
+                                    <a class="leftMenulink" href="rest.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li class=" leftMenuinActive ">REST</li>
+                                        </div>
+                                    </a>
+                                    <a class="leftMenulink" href="jaxRX.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li class="leftMenuinActive">JAX-RS</li>
+                                        </div>
+                                    </a>
+
+
+                                </div>
+
+                            </ul>
+
+                            <ul style="padding-left:0%;">
+                                <div class="listHeading">JAX-RS JERSEY </div>
+                                <div>
+                                    <a class="leftMenulink" href="jerseyHome.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li class=" leftMenuinActive">Jeresy Example - Hello Web Service </li>
+                                        </div>
+                                    </a>
+                                    <a class="leftMenulink" href="jerseyJSON.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li class=" leftMenuinActive">Jeresy Example - Produce JSON </li>
+                                        </div>
+                                    </a>
+                                    <a class="leftMenulink" href="jerseyXML.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li class=" leftMenuActive">Jeresy Example - Produce XML </li>
+                                        </div>
+                                    </a>
+                                    <a class="leftMenulink" href="jerseyClientGetXml.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li class=" leftMenuinActive">JAVA CLIENT- GET & POST XML </li>
+                                        </div>
+                                    </a>
+										   <a class="leftMenulink" href="JAX-RSAnnotations.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li class=" leftMenuinActive">JAX-RS - Annotations </li>
+                                        </div>
+                                    </a>
+                                </div>
+                            </ul>
+
+                            <ul style="padding-left:0%;">
+                                <div class="listHeading">JAVA CLIENT : CLIENT</div>
+                                <a class="leftMenulink" href="jerseyHome.htm">
+                                    <div class="leftMenuActiveDIV">
+                                        <li class=" leftMenuActive">Consuming XML - GET </li>
+                                    </div>
+                                </a>
+                                <div>
+
+                                </div>
+                            </ul>
+							
+								       <ul style="padding-left:0%;">
+                                <li class="listHeading">JAX-RS Annotations - Examples </li>
+                                <div>
+                                    <a class="leftMenulink" href="jaxRsAnnotationPath.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li class=" leftMenuinActive ">JAX-RS @Path and @PathParam</li>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </ul>
+
+
+                        </nav>
+                        <hr>
+                    </div>
+
+
+                </div>
+
+                <div ng-include="'../pages/fb.htm'"></div>
+            </div>
+
+
+
+        </div>
+        <!--/left-->
+
+        <!--center-->
+        <div class="col-xs-12 col-sm-6  col-md-6" style="padding-left:2px ; padding-right:2px ">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+
+                        <div class="panel-body">
+                            <div class="mainParaHeding"> Restful Java Client (Jersey)- Consuming RESTful Web Services(XML) </div>
+                            <h1 style="display: none;"> Restful Java Client (Jersey)- Consuming RESTful Web Services (XMl) </h1>
+                            <hr class="mainHeading">
+
+                            <p>
+                                In this tutorial we will see how to consume RESTful Web Services that produces XML data. we will use Jersey 1.8 Client API to consume HTTP-based RESTful Web Services.
+                                <p>
+
+
+                                    <ul class="pager">
+                                        <li class="previous"><a href="jerseyXML.htm">Previous</a></li>
+                                        <li class="next disabled"><a href="jerseyHome.htm">Next</a></li>
+                                    </ul>
+                                </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                 * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                 */
+
+                var disqus_config = function() {
+                    this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = 10; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document,
+                        s = d.createElement('script');
+
+                    s.src = '//entityclass.disqus.com/embed.js';
+
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+
+            </script>
+
+            <hr>
+
+
+
+        </div>
+        <!--/center-->
+
+        <!--right-->
+        <div class="col-xs-5 col-sm-3  col-md-3" style="padding-left:2px ; padding-right:2px">
+            <div>
+                <div ng-include="'poll.htm'"></div>
+
+            </div>
+        </div>
+        <!--/right-->
+        <hr>
+    </div>
+    <!--/container-fluid-->
+
+    <div id="footer">
+        <div ng-include="'../pages/footer.html'"></div>
+    </div>
+
+    <!-- Bootstrap Core JavaScript -->
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/myNoteApp.js"></script>
+    <script src="../js/myNoteCtrl.js"></script>
+
+
+
+
+</body>
+
+</html>

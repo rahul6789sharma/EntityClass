@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+						<meta property="og:site_name" content="www.entityclass.in" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta name="author" content="entityclass.in">
+
+<meta property="og:title" content="Rest Tutorial | Jersey | RestEsy| JAX-RS"/>
+
+<meta property="og:url" content="http://www.entityclass.in/rest/jerseyJSON.htm" />
+<meta property="og:description" content="Using Jersey and Jackson to create restful service that will produce JSON as response. "/>
+    
+	
+	
+    <title>REST Example - Producing JSON : REST-RS (Jersey) + Jackson </title>
+
+    <meta name="keywords" content="Entity Class, REST tutorial, beginner REST tutorial, JERSEY , RestEasy, REST-RS (Jersey) + Jackson, Produce JSON" />
+    <meta name="description" content="Using Jersey and Jackson to create restful service that will produce JSON as response." />
+    <meta name="robots" content="index, follow">
+
+	    <script type="text/javascript" src="../js/shCore.js"></script>
+    <script type="text/javascript" src="../js/shBrushJava.js"></script>
+    <script type="text/javascript" src="../js/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../css/shCoreDefault.css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+
+    </script>
+	
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../img/EcLogo.png">
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/entityClass.js"></script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body ng-app="">
+
+    <div style="margin-bottom:5%;">
+        <div ng-include="'../pages/header.htm'"></div>
+    </div>
+
+
+    <div class="container-fluid" style="padding-right:0px; padding-left:0px">
+
+        <!--left-->
+        <div class="col-xs-12 col-sm-3 col-md-3 " style="padding-left:4px ; padding-right:2px">
+            <div class="panel-group">
+                <div class="panel panel-default">
+
+                    <div class="panel-heading"><strong>REST</strong></div>
+                    <div class="panel-body">
+
+                          	    <div id="leftMenu">						
+					         </div>
+                     
+                    </div>
+
+
+                </div>
+
+                <div ng-include="'../pages/fb.htm'"></div>
+            </div>
+
+
+
+        </div>
+        <!--/left-->
+
+        <!--center-->
+        <div class="col-xs-12 col-sm-6  col-md-6" style="padding-left:2px ; padding-right:2px ">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+
+                        <div class="panel-body">
+                            <div class="mainParaHeding"> REST Example - Produce JSON : REST-RS (Jersey) + Jackson </div>
+                            <h1 style="display: none;"> REST Example - Produce JSON : REST-RS (Jersey) + Jackson</h1>
+                            <hr class="mainHeading">
+
+                            <p>
+                                In this tutorial we are using <a href="https://jersey.java.net/" class="myancor" target="_blank"> Jersey </a>and Jackson to create restful service that will produce JSON as response. Jackson is library used for marshal a Java Object to JSON, and ummarshal an JOSN data to Java Object. Here we are not creating JAX-RS application from top to bottom, just we will see main part to create JSON response.
+
+                            </p>
+                            <p> To create REST application form starting read <a href="jerseyHome.htm" class="myancor">  REST Example - Hello Web Service </a> </p>
+
+                            <br/>
+                            <p> <strong>1. Project Structure </strong>
+                            </p>
+                            <p> In this project (RestJSONDemo) we have defined proper REST project structure like from Student Entity Class , DAO class and Service Class.</p>
+                            <p> Student is Model or Entity Class. DAO(Data Access Object) class is where we can write all data access operation for Student Object like get Student , save Student or find particular Student. StudentServce Class use the DAO class method and exposed as service.
+                                <p>
+                                    <div class="imgBox">
+                                        <img class="img-responsive" src="img/projectStruJson.png" alt="dirStructor" title="jersey-hello-world" style="padding-left:15%;"></img>
+                                    </div>
+                                </p>
+                                <br/>
+
+                                <p>
+                                    <strong>2. POM.xml : Project Dependencies </strong>
+                                </p>
+
+                                <p>
+
+                                    We have to add 'jersey-json.jar' to project to integrate Jersey with Jackson. so declares 'jersey-json.jar' in Maven pom.xml file.
+
+                                </p>
+                                <p>In this demo we are using jersey server 1.8 version and jersey-json 1.8 version. Jersey uses Jackson to convert object to / form JSON.
+                                </p>
+                                <p>
+                                    <p>
+                                        <div class="command">
+                                            <pre class="brush: xml; gutter: false;" style=" overflow-y: hidden !important; ">
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+	http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.techtutorial.rest</groupId>
+	<artifactId>RestJSONDemo</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>RestJSONDemo Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+		
+	<dependencies>
+	
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>1.8</version>
+		</dependency>
+		
+		<dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-json</artifactId>
+                <version>1.8</version>
+       </dependency>
+		
+	</dependencies>
+	
+	<build>
+		<finalName>RestJSONDemo</finalName>
+	</build>
+	
+</project>
+
+
+</pre>
+
+                                        </div>
+                                    </p>
+                                    <br/>
+
+                                    <p>
+                                        <strong>3.web.xml : Enabling JOSN Mapping  </strong>
+                                    </p>
+                                    <p>
+                                        To automatically marshal and unmarshal Java Objets to and from Json we have to specify a parameter to your Jersey web.xml configuration . Add "com.sun.jersey.api.json.POJOMappingFeature" as 'init-param' in web.xml
+                                    </p>
+
+                                    <p>
+
+                                        <div class="command">
+                                            <pre class="brush: xml; gutter: false;" style=" overflow-y: hidden !important; ">
+		
+<web-app>
+  <display-name>Restful JSON Web Application</display-name>
+  
+  	<servlet>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<servlet-class>
+                    com.sun.jersey.spi.container.servlet.ServletContainer
+                </servlet-class>
+		<init-param>
+		     <param-name>com.sun.jersey.config.property.packages</param-name>
+		     <param-value>com.techtutorial.rest</param-value>
+		</init-param>
+		
+		<init-param>
+			  <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+			  <param-value>true</param-value>
+	    </init-param>
+	
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+    <servlet-name>jersey-serlvet</servlet-name>
+      <url-pattern>/rest/*</url-pattern>
+   </servlet-mapping>
+	
+</web-app>
+		</pre>
+                                        </div>
+
+
+                                    </p>
+
+
+
+                                    <p>
+                                        <strong>4. Student Class </strong>
+                                    </p>
+                                    <p>
+                                        Object of Student class is which will be represented as JOSN formate using Jersey.
+                                    </p>
+
+                                    <p>
+                                        <div class="command">
+                                            <pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+package com.techtutorial.rest;
+
+public class Student {
+
+	private String name;
+	private String Address;
+	private int id;
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getAddress() {
+		return Address;
+	}
+	
+	public void setAddress(String address) {
+		Address = address;
+	}	
+
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}	
+}
+</pre>
+
+                                        </div>
+
+                                    </p>
+
+
+                                    <p>
+                                        <strong>5. StudentDoa Class </strong>
+                                    </p>
+
+                                    <p>
+                                        Following StudentDoa calss has function that is been hard coded to show the functionality related to listing down student. Here in DOA class we can implement required business logic where you may get the users or other required data from your database or any other resource.
+                                    </p>
+
+                                    <p>
+                                        <div class="command">
+                                            <pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+package com.techtutorial.rest;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class StudentDao {
+
+	public Student getStudent() {
+
+		Student std = new Student();
+		std.setName("Jami");
+		std.setAddress("India");
+		std.setId(1);
+
+		return std;
+
+	}
+	
+	public List<Student> getStudents(){
+		
+		List<Student> stdList = new ArrayList<Student>();
+		
+		Student std1 = new Student();
+		std1.setName("Jami");
+		std1.setAddress("India");
+		std1.setId(1);
+		
+		Student std2 = new Student();
+		std2.setName("Kami");
+		std2.setAddress("USA");
+		std2.setId(2);
+		
+		stdList.add(std1);
+		stdList.add(std2);
+		
+		return stdList;
+		
+	}
+}
+</pre>
+
+                                        </div>
+                                    </p>
+
+
+                                    <p>
+                                        <strong>6. StudentService Class </strong>
+                                    </p>
+                                    <p>
+                                        Now We will see the Service class that will produce JOSN with Jersey as response.
+                                    </p>
+
+                                    <p>
+                                        <div class="command">
+                                            <pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+
+package com.techtutorial.rest;
+
+import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/StudentService")
+public class StudentService {
+	
+	StudentDao studentDao = new StudentDao();
+	
+	@GET
+	@Path("/student")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Student getStudent() {
+		 
+		return studentDao.getStudent();
+ 
+	}
+	
+	@GET
+	@Path("/students")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List&lt;Student&gt; getStudents() {
+		
+		return studentDao.getStudents();
+ 
+	}
+}
+
+</pre>
+
+                                        </div>
+                                    </p>
+
+                                    <p>
+                                        <strong>7. Demo </strong>
+                                    </p>
+
+                                    <p>
+                                        URL: <strong> localhost:8080/RestJSONDemo/rest/StudentService/student </strong>
+                                    </p>
+
+                                    <p>
+                                        In this example, web request from 'RestJSONDemo/rest/StudentService/student' will match to 'StudentService', via @Path("/StudentService").
+                                    </p>
+                                    <p>
+                                        Then it matches with the method 'getStudent' via @Path("/student"). It will produce JOSN for one student instance.
+                                    </p>
+
+
+
+                                    <p>
+                                        <div class="imgBox">
+                                            <img class="img-responsive" src="img/JSONStudent.png" alt="JSONresponse" title="jersey-hello-world" style="padding-left:1%;"></img>
+                                        </div>
+                                    </p>
+
+                                    <p>
+                                        URL: <strong> localhost:8080/RestJSONDemo/rest/StudentService/students</strong>
+                                    </p>
+                                    <p>
+                                        This is another method that will return list of students as JOSN
+
+                                    </p>
+                                    <p>
+                                        <div class="imgBox">
+                                            <img class="img-responsive" src="img/JSONStudents.png" alt="JOSNresponse" title="jersey-hello-world"> </img>
+                                        </div>
+                                    </p>
+
+
+                                    <br/>
+
+                                    <p><strong>Download This Project</strong></p>
+                                    <p> You can import the Rest Project as maven project in eclipse.
+                                    </p>
+                                    <p> or you can directly use maven commend to build the war file and deploy on tomcat server.
+                                    </p>
+                                    <p>Go to project directory "RestJSONDemo" and run mvn commend as: this will create target folder and generate war file</p>
+                                    <p>
+                                        <div class="command">
+                                            mvn clean install
+                                        </div>
+                                    </p>
+                                    <a target="_self" href="../SampleCodes/RestDemo/RestJSONDemo.zip">
+                                        <button type="button" class="btn btn-success">
+                                            <span class="glyphicon glyphicon-download-alt">
+		  </span> &nbsp; &nbsp; RestJSONDemo.zip &nbsp; &nbsp;
+                                        </button>
+                                    </a>
+
+
+                                    <p>
+                                        <ul class="pager">
+                                            <li class="previous"><a href="jerseyHome.htm">Previous</a></li>
+                                            <li class="next"><a href="jerseyXML.htm">Next</a></li>
+                                        </ul>
+                                    </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+
+
+            <hr>
+
+
+            <div id="disqus_thread"></div>
+
+
+            <hr>
+
+
+        </div>
+        <!--/center-->
+
+        <!--right-->
+        <div class="col-xs-5 col-sm-3  col-md-3" style="padding-left:2px ; padding-right:2px">
+            <div>
+ <div ng-include="'../pages/rightPannel.htm'"></div>
+
+
+
+            </div>
+        </div>
+        <!--/right-->
+       
+    </div>
+    <!--/container-fluid-->
+
+    <div id="footer">
+        <div ng-include="'../pages/footer.html'"></div>
+    </div>
+
+    <!-- Bootstrap Core JavaScript -->
+
+
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/myNoteApp.js"></script>
+    <script src="../js/myNoteCtrl.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:site_name" content="www.entityclass.in" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta name="author" content="entityclass.in">
+
+<meta property="og:title" content="Exception handling | Rest Tutorial | Jersey | RestEsy| JAX-RS"/>
+
+<meta property="og:url" content="http://www.entityclass.in/rest/home.htm" />
+<meta property="og:description" content="A web service is method or mechanism to communicate between different applications using open standard such as XML, WSDL, and SOAP."/>
+    
+    <title>Exception handling In RESTFul Web Service</title>
+    <meta name="keywords" content="Exception, Exception handling, Web Service, Entity Class, REST tutorial, Beginner REST tutorial, JERSEY Example, REST-RS (Jersey), JAX-RS" />
+    <meta name="description" content="Exception handling In RESTFul Web Service" />
+    <meta name="robots" content="index, follow">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../img/EcLogo.png">
+	<script src="../js/jquery.min.js"></script>
+    <script src="../js/entityClass.js"></script>
+	
+	    <script type="text/javascript" src="../js/shCore.js"></script>
+    <script type="text/javascript" src="../js/shBrushJava.js"></script>
+    <script type="text/javascript" src="../js/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../css/shCoreDefault.css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+
+    </script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	 
+</head>
+
+<body ng-app="">
+    <div style="margin-bottom:5%;">
+        <div ng-include="'../pages/header.htm'">
+		</div>
+
+    </div>
+    <div class="container-fluid" style="padding-right:0px; padding-left:0px">
+        <!--left-->
+        <div class="col-xs-12 col-sm-3 col-md-3 " style="padding-left:4px ; padding-right:2px">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong> REST </strong></div>
+                    <div class="panel-body">
+                        
+                            
+							<div id="leftMenu">						
+					         </div>
+			
+                    </div>
+                </div>
+                <div ng-include="'../pages/fb.htm'"></div>
+            </div>
+        </div>
+        <!--/left-->
+        <!--center-->
+        <div class="col-xs-12 col-sm-6  col-md-6" style="padding-left:2px ; padding-right:2px ">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="mainParaHeding"> Exception Handling  Using ExceptionMapper</div>
+                            <h1 style="display: none;"> Exception Handling In RESTFul Web Service</h1>
+                            <hr class="mainHeading">
+							
+							
+							<p>
+							Exception/Error handling is one of the most important and required part of coding or development as it is equal important when we are designing our REST API.
+							If any error occurred while sending user request we should show the user an error with details like brief exception message, error code, and actual root cause etc.
+				
+							</p>
+							<p>in this tutorial we will see how to designed and implemented the error handling of a REST API with the help Jersey framework.</p>
+							<p>
+							To build custom exception handlers, JAX-RS provides <strong>ExceptionMapper</strong> interface.ExceptionMapper is a 
+							contract for a provider that maps Java exceptions to Response object. 
+							An implementation of this interface must be annotated with Provider to work correctly.
+							</p>
+							
+							</br>
+							
+							   
+							  <p><strong>1. Design MyApplicationException Class </strong></p>
+							  <p>Here we will see how to build our custom exception handler.</p>
+                            <p>MyApplicationException is the your custom Exception class that extends Exception.
+							 This class define your your application Specific Checked Exceptions.
+							</p>
+							<div class="command">
+                                <pre class="brush: java; gutter: false;">
+								
+package com.techtutorial.rest.exception;
+
+import java.io.Serializable;
+
+public class MyApplicationException extends Exception implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+
+	public MyApplicationException() {
+		super();
+	}
+
+	public MyApplicationException(String msg) {
+		super(msg);
+	}
+	
+	 public MyApplicationException(String msg, Exception e)  {
+	        super(msg, e);
+	    }
+
+	
+}
+
+                              </pre>
+                            </div>
+							</br>
+							
+							<p><strong>2. Design ApplicationExceptionHandler (Checked Exceptions) Class </strong></p>
+							<p>
+							This is mapper class that implements ExceptionMapper. Exception mapper encapsulates the error message with the HTTP status you desire and you might get a response like the following
+							
+							</p>
+							
+								<div class="command">
+                                <pre class="brush: java, xml; gutter: false;">
+
+package com.techtutorial.rest.exception;
+
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
+
+@Provider
+public class ApplicationExceptionHandler implements
+		ExceptionMapper&lt;MyApplicationException&gt; {
+
+	public ApplicationExceptionHandler() {
+		super();
+	}
+
+	public Response toResponse(MyApplicationException exception) {
+
+		return Response.status(Status.BAD_REQUEST)
+				.entity(exception.getMessage()).type(MediaType.TEXT_PLAIN)
+				.build();
+	}
+
+}
+                              </pre>
+                            </div>
+							
+							</br>
+							
+								<p><strong>3. Design GenericExceptionHandler (UnChecked Exceptions) Class </strong></p>
+								<p>So all other  Exception are mapped to this GenericExceptionHandler mapper class.
+								This class catch all other exception that are not of type MyApplicationException, by implementing an ExceptionMapper on RuntimeException.
+								</p>
+								
+								
+															<div class="command">
+                                <pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+
+package com.techtutorial.rest.exception;
+
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
+
+@Provider
+public class GenericExceptionHandler implements 
+ExceptionMapper&lt;RuntimeException&gt; {
+
+	public Response toResponse(RuntimeException arg0) {
+		
+		return Response.status(Status.INTERNAL_SERVER_ERROR).
+		entity("Some Other Problem").type(MediaType.TEXT_PLAIN).build();
+		
+	}
+
+}
+                              </pre>
+                            </div>	
+								
+								
+	</br>							
+				<p><strong>4. Rest Service With Exception handling</strong>	</p>			
+					
+<p>
+This is the simple REST Service , here i am trying to explain two different exceptions.
+There is a method getStudent() that will take student id of integer type as input.
+so, if we provide id as String it will throw MyApplicationException with 400 Error(Bad request) code.
+i am trying to generate serialNumber of student (custom login 50000 divided by student id), so if user pass 0 as id then it will throw runtime Exception and catch by our
+GenericExceptionHandler class and we will return 500 error(Internal Server Error) code .
+</p>
+																		
+								
+						<div class="command">
+                                <pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+
+package com.techtutorial.rest;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
+import com.techtutorial.rest.exception.MyApplicationException;
+
+@Path("/StudentService")
+public class StudentService {
+
+	@GET
+	@Path("/studentById/{id}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getStudent(@PathParam("id") String id)
+			throws MyApplicationException {
+
+		int serialNumber = 0;
+
+		try {
+
+			Integer.parseInt(id);
+			serialNumber = 50000 / Integer.parseInt(id);
+
+		} catch (NumberFormatException e) {
+
+			throw new MyApplicationException("id is not a number !!");
+		} 
+
+		return Response
+				.status(Status.OK)
+				.entity("Welcome Student with ID :" + id + "and serialNumber: "
+						+ serialNumber).build();
+
+	}
+
+}
+
+                              </pre>
+                            </div>	
+</br>
+				<p><Strong> 5 Demo </Strong></p>	
+							<p>1. Valid Request With integer ID</p>
+							<p><strong>"http://localhost:8080/RestExceptionDemo/rest/StudentService/studentById/100" </strong></p>	
+							
+							   <p>
+                                        <div class="imgBox">
+                                            <img class="img-responsive" src="img/ValidRequestNOException.png" alt="ValidRequestNOException" title="ValidRequestNOException" style="padding-left:1%;"></img>
+                                        </div>
+                                </p>
+								
+								</br>
+								
+								<p>2. InValid Request with String ID </p>
+								<p><strong>"http://localhost:8080/RestExceptionDemo/rest/StudentService/studentById/abc" </strong></p>	
+							
+							   <p>
+                                        <div class="imgBox">
+                                            <img class="img-responsive" src="img/invalidRequestStringID.png" alt="invalidRequestStringID" title="invalidRequestStringID" style="padding-left:1%;"></img>
+                                        </div>
+                                </p>
+								
+								<p>3. InValid Request with ID equal to 0 </p>
+								<p><strong>"http://localhost:8080/RestExceptionDemo/rest/StudentService/studentById/0" </strong></p>	
+							
+							   <p>
+                                        <div class="imgBox">
+                                            <img class="img-responsive" src="img/invalidrequestWithZeroID.png" alt="invalidrequestWithZeroID" title="invalidrequestWithZeroID.png" style="padding-left:1%;"></img>
+                                        </div>
+                                </p>
+								
+								
+								<br/>
+
+                            <p><strong>Download This Project</strong></p>
+                            <p> You can import the Rest Project as maven project in eclipse.
+                            </p>
+                            <p> or you can directly use maven commend to build the war file and deploy on tomcat server.
+                            </p>
+                            <p>Go to project directory "RestExceptionDemo" and run mvn commend as: this will create target folder and generate war file</p>
+                            <p>
+                                <div class="command">
+                                    mvn clean install
+                                </div>
+                            </p>
+                            <a target="_self" href="../SampleCodes/RestDemo/RestExceptionDemo.zip">
+                                <button type="button" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-download-alt">
+		  </span> &nbsp; RestExceptionDemo.zip &nbsp;
+                                </button>
+                            </a>
+
+                            <p>
+                                <ul class="pager">
+                                    <li class="previous"><a href="jaxRX.htm">Previous</a></li>
+                                    <li class="next"><a href="jerseyJSON.htm">Next</a></li>
+                                </ul>
+                            </p>
+
+									
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <!--/center-->
+        <!--right-->
+        <div class="col-xs-12 col-sm-3  col-md-3" style="padding-left:2px ; padding-right:2px">
+            <div>
+               
+ <div ng-include="'../pages/rightPannel.htm'"></div>
+
+
+
+            </div>
+        </div>
+        <!--/right-->
+       
+    </div>
+    <!--/container-fluid-->
+    <div id="footer">
+        <div ng-include="'../pages/footer.html'"></div>
+    </div>
+    <!-- Bootstrap Core JavaScript -->
+    
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/myNoteApp.js"></script>
+    <script src="../js/myNoteCtrl.js"></script>
+</body>
+
+</html>

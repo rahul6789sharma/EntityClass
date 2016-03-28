@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta property="og:site_name" content="www.entityclass.in" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta name="author" content="entityclass.in">
+
+<meta property="og:title" content="SwitchYard Tutorial | SwitchYard "/>
+
+<meta property="og:url" content="http://www.entityclass.in/switchYard/SYEclipseProject.htm" />
+<meta property="og:description" content="First SwitchYard Service"/>
+    
+	
+	
+    <title>SCA Binding</title>
+
+    <meta name="keywords" content="SCA Binding,Entity Class,SwitchYard, Jboss SwitchYard, SwitchYard Tutorials, Learn SwitchYard, Hello World SwitchYard Project,
+	JBoss FSW, JBoss Fuse Service Work" />
+    <meta name="description" content="First SwitchYard Service and Explain SCA Binding" />
+    <meta name="robots" content="index, follow">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../img/EcLogo.png">
+
+    <script type="text/javascript" src="../js/shCore.js"></script>
+    <script type="text/javascript" src="../js/shBrushJava.js"></script>
+    <script type="text/javascript" src="../js/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../css/shCoreDefault.css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+
+    </script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/entityClass.js"></script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+</head>
+
+<body ng-app="">
+    <div style="margin-bottom:5%;">
+        <div ng-include="'../pages/header.htm'">
+		</div>
+
+    </div>
+    <div class="container-fluid" style="padding-right:0px; padding-left:0px">
+        <!--left-->
+        <div class="col-xs-12 col-sm-3 col-md-3 " style="padding-left:4px ; padding-right:2px">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>SwitchYard</strong></div>
+                    <div class="panel-body">
+                        
+                            
+							<div id="leftMenu">						
+					         </div>
+			
+                    </div>
+                </div>
+                <div ng-include="'../pages/fb.htm'"></div>
+            </div>
+        </div>
+        <!--/left-->
+        <!--center-->
+        <div class="col-xs-12 col-sm-6  col-md-6" style="padding-left:2px ; padding-right:2px ">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="mainParaHeding">SCA Binding</div>
+                            <h1 style="display: none;">SCA Binding</h1>
+                            <hr class="mainHeading">
+                           
+						   <strong>What is SCA Binding?</strong>
+						   <p> The Service Component Architecture (SCA) binding provides a mean by witch SwitchYard service and SwitchYard aware clients  
+						  can communicate with one another. </p>
+						  <p>There are three basic use cases for the SCA binding:</p>
+						   <ol>
+						   <li>Facilitate inter-application communication within a SwitchYard runtime.  The SCA binding can be used to link a composite reference in one application to a composite service in another application.</li>
+						   <li>Provide a remote invocation endpoint for external clients using RemoteInvoker.  This allows a stand-alone client to communicate with a SY application.</li>
+						   <li>Allow clustering of SwitchYard services in two or more SwitchYard instances.</li>
+						   </ol>
+						   
+						   <p><strong>Binding service with SCA</strong></p>
+						   <p>An SCA binding can be added to <strong>composite-level services </strong>to make that service available to other applications and remote clients through a SwitchYard internal communication protocol</p>
+						  
+						  <p>In previous <a href="SYEclipseProject.htm" class="myancor"> SwitchYard Hello World Service </a> example we have promoted <strong>HelloWorldService</strong>
+						   component service to composite service.</p>
+						   <p>Now We will see how to bind our <strong>HelloWorldService</strong> composite service with SCA so that remote invoker can access it. </p>
+							
+							
+							  <p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/SYPromateServiceCanvas.png" alt="SYPromateServiceCanvas" title="SYPromateServiceCanvas">
+                                </div>
+                            </p>
+							<p> Hover over <strong>HelloWorldService</strong> service and click on <strong>Binding</strong> (or drag and drop an SCA binding widget on
+                             <strong>HelloWorldService</strong> composite service (large green chevron)). There are many option to bind composite service , here 
+							we will see SCA binding , click on SCA . </p>
+							
+							
+						    <p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/SYSCABinding.png" alt="SYSCABinding" title="SYSCABinding">
+                                </div>
+                            </p>
+							<p>A dialogue will appear given name to your SCA binding and click on finish. </p>
+							<p>There is only one configuration option available for SCA bindings:</p>
+							<ul>
+							<li><strong>clustered</strong> : when enabled, the service will be published in the distributed SY runtime registry so that other cluster instances can discover and consume the service.</li>
+							</ul>
+							    <p>
+                                <div class="imgBox">
+                                    <img class="img-responsive" src="img/SYSCABindingName.png" alt="SYSCABindingName" title="SYSCABindingName">
+                                </div>
+                            </p>
+					<p>Regardless of the clustering setting, all services with an SCA binding are invokable through the SwitchYard remote invoker endpoint.  The default URL for this endpoint is <strong>http://localhost:8080/switchyard-remote.</strong>
+					The hostname and port for this endpoint are based on the default HTTP listener defined in AS 7.</p>
+					<p>Deployed the SwitchYard Application in JBoss AS or EAP.</p>
+					
+					
+					 <hr class="mainHeading">
+					
+					 <div class="mainParaHeding">Remote Invoker</div>
+                            <h1 style="display: none;">Remote Invoker</h1>
+                            <hr class="mainHeading">
+							
+					
+					<p>The RemoteInvoker serves as a remote invocation client for SwitchYard services.  It allows non-SwitchYard applications to invoke any service 
+					in SwitchYard which uses a <binding.sca> binding</p>
+					
+					<p>
+					<strong>RemoteInvoker Dependencies </strong>
+					</p>
+					<p>RemoteInvoker and supporting classes can be included in your application via the following Maven dependency:</p>
+					<div class="command">
+                                    <pre class="brush: xml; gutter: false;" style=" overflow-y: hidden !important; ">
+<dependency>
+   <groupId>org.switchyard</groupId>
+   <artifactId>switchyard-remote</artifactId>
+   <version> <!-- SY version --> </version>
+</dependency>
+                                   </pre>
+								   </div>
+								   
+								   <p>Each instance of SY includes a special context path called "switchyard-remote" which is bound to the default HTTP listener in AS 7.  The initial version of RemoteInvoker supports communication with this endpoint directly. 
+								   Here's an example of invoking an in-out service in SY using the HttpInvoker:</p>
+							
+								<div class="command">
+                                <pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+package com.example.switchyard.switchyard_helloWord;
+
+
+import static java.lang.System.out;
+import javax.xml.namespace.QName;
+
+import org.switchyard.remote.RemoteInvoker;
+import org.switchyard.remote.RemoteMessage;
+import org.switchyard.remote.http.HttpInvoker;
+
+public final class RemoteClient {
+
+    private static final QName SERVICE = new QName(
+            "urn:com.example.switchyard:switchyard-helloWord:1.0",
+            "HelloWorldService");
+    private static final String URL = "http://localhost:8080/switchyard-remote";
+
+    public static void main(final String[] ignored) throws Exception {
+       
+        RemoteInvoker invoker = new HttpInvoker(URL);
+        RemoteMessage message = new RemoteMessage();
+        message.setService(SERVICE).setOperation("getMessage").setContent("test");
+
+        RemoteMessage reply = invoker.invoke(message);
+       
+        if (reply.isFault()) {
+            System.err.println("Oops ... something bad happened.  "
+                    + reply.getContent());
+        } else {
+           
+            out.println("==================================");
+            out.println("SwitchYard Service? "  +  reply.getContent());
+            out.println("==================================");
+        }
+    }
+   
+}
+
+                                </pre>
+
+                            </div>
+
+<p>Output of this class will be like</p>							
+							<p>
+
+
+<div class="imgBox">
+                                    <img class="img-responsive" src="img/SYRemoteInvockerResult.png" alt="SYRemoteInvockerResult" title="SYRemoteInvockerResult">
+                                </div>
+
+							</p>
+							
+							
+							 <p><strong>Download This Project</strong></p>
+                            <p> You can import the Rest Project as maven project in eclipse.
+                            </p>
+                            <p> or you can directly use maven command to build the war file and deploy on tomcat server.
+                            </p>
+                            <p>Go to project directory "switchyard-helloWord-SCA" and run mvn command as: this will create target folder and generate war file</p>
+                            <p>
+                                <div class="command">
+                                    mvn clean install
+                                </div>
+                            </p>
+                            <a target="_self" href="../SampleCodes/SwitchYardDemo/switchyard-helloWord-SCA.zip">
+                                <button type="button" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-download-alt">
+		  </span> &nbsp; switchyard-helloWord-SCA.zip &nbsp;
+                                </button>
+                            </a>
+							
+                                <ul class="pager">
+                                    <li class="previous disabled"><a href="SYRunTimeSetUp.htm">Previous</a></li>
+                                    <li class="next"><a href="#">Next</a></li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <!--/center-->
+        <!--right-->
+        <div class="col-xs-12 col-sm-3  col-md-3" style="padding-left:2px ; padding-right:2px">
+            <div>
+ <div ng-include="'../pages/rightPannel.htm'"></div>
+
+
+
+            </div>
+        </div>
+        <!--/right-->
+       
+    </div>
+    <!--/container-fluid-->
+    <div id="footer">
+        <div ng-include="'../pages/footer.html'"></div>
+    </div>
+    <!-- Bootstrap Core JavaScript -->
+    
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/myNoteApp.js"></script>
+    <script src="../js/myNoteCtrl.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+
+   <script> 
+   
+   $(function(){
+	  var pagepath =window.location.pathname.split("/");
+	  var fullpagename = pagepath.pop();
+	  var z= fullpagename.split("."); 
+	  var pageName = z[0];
+	  var a= document.getElementById(pageName);
+	  a.className= 'leftMenuActive';
+   });
+    </script>
+	
+	<!-- id of a tag should be page name -->
+	   <nav id="navigation">
+                            <ul style="padding-left:0%;">
+                                <div class="listHeading">INTRODUCTION TO REST </div>
+                                <div style="">
+                                    <a class="leftMenulink" href="home.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li id="home" class="leftMenuinActive" >What is Web Service</li>
+                                        </div>
+                                    </a>
+                                    <a class="leftMenulink" href="rest.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li id="rest" class="leftMenuinActive"> REST</li>
+                                        </div>
+                                    </a>
+                                    <a class="leftMenulink" href="jaxRX.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li id="jaxRX" class="leftMenuinActive">JAX-RS</li>
+                                        </div>
+                                    </a>
+                                </div>
+                            </ul>
+                            <ul style="padding-left:0%;">
+                                <div class="listHeading">JAX-RS JERSEY </div>
+                                <div>
+                                    <a class="leftMenulink" href="jerseyHome.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li id="jerseyHome" class=" leftMenuinActive">Jeresy Example - Hello Web Service</li>
+                                        </div>
+                                    </a>
+                                    <a class="leftMenulink" href="jerseyJSON.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li id="jerseyJSON" class=" leftMenuinActive">Jeresy Example - Produce JSON </li>
+                                        </div>
+                                    </a>
+                                    <a class="leftMenulink" href="jerseyXML.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li id="jerseyXML" class=" leftMenuinActive">Jeresy Example - Produce XML </li>
+                                        </div>
+                                    </a>
+                                    <a class="leftMenulink" href="jerseyClientGetXml.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li id="jerseyClientGetXml" class=" leftMenuinActive">JAVA CLIENT- GET & POST XML </li>
+                                        </div>
+                                    </a>
+									
+										   <a class="leftMenulink" href="JAX-RSAnnotations.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li  id="JAX-RSAnnotations"  class=" leftMenuinActive">JAX-RS - Annotations </li>
+                                        </div>
+                                    </a>
+                                </div>
+                            </ul>
+                            <ul style="padding-left:0%;">
+                                <li class="listHeading">JAX-RS : RESTEasy </li>
+                                <div>
+                                    <a class="leftMenulink" href="RestEasyHelloWorld.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li id="RestEasyHelloWorld"  class=" leftMenuinActive ">RESTEasy Example - Hello Web Service</li>
+                                        </div>
+                                    </a>
+                                </div>
+                            </ul>
+							
+						     <ul style="padding-left:0%;">
+                                <li class="listHeading">JAX-RS Annotations - Examples </li>
+                                <div>
+                                    <a class="leftMenulink" href="jaxRsAnnotationPath.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li  id="jaxRsAnnotationPath" class="leftMenuinActive ">JAX-RS @Path and @PathParam</li>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </ul>
+							
+							
+														
+						     <ul style="padding-left:0%;">
+                                <li class="listHeading">Exception handling in REST API</li>
+                                <div>
+                                    <a class="leftMenulink" href="exceptionhandling.htm">
+                                        <div class="leftMenuActiveDIV">
+                                            <li  id="exceptionhandling" class="leftMenuinActive ">Using ExceptionMapper</li>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </ul>
+							
+                        </nav>

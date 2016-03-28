@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		
+				<meta property="og:site_name" content="www.entityclass.in" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta name="author" content="entityclass.in">
+
+<meta property="og:title" content="Rest Tutorial | Jersey | RestEsy| JAX-RS"/>
+
+<meta property="og:url" content="http://www.entityclass.in/rest/jerseyClientGetXml.htm" />
+<meta property="og:description" content="Using Jersey and JAXB to create restful service that will produce xml as response."/>
+    
+	
+    <title>REST Example - Produce XML : REST-RS (Jersey) + JAXB </title>
+
+    <meta name="keywords" content="Entity Class, REST tutorial, beginner REST tutorial, JERSEY , RestEasy, REST-RS (Jersey) + JAXB, Produce xml" />
+    <meta name="description" content="Using Jersey and JAXB to create restful service that will produce xml as response." />
+    <meta name="robots" content="index, follow">
+
+
+    <script type="text/javascript" src="../js/shCore.js"></script>
+    <script type="text/javascript" src="../js/shBrushJava.js"></script>
+    <script type="text/javascript" src="../js/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../css/shCoreDefault.css" />
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+
+    </script>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../img/EcLogo.png">
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/entityClass.js"></script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body ng-app="">
+
+    <div style="margin-bottom:5%;">
+        <div ng-include="'../pages/header.htm'"></div>
+    </div>
+
+
+    <div class="container-fluid" style="padding-right:0px; padding-left:0px">
+
+        <!--left-->
+        <div class="col-xs-12 col-sm-3 col-md-3 " style="padding-left:4px ; padding-right:2px">
+            <div class="panel-group">
+                <div class="panel panel-default">
+
+                    <div class="panel-heading"><strong>REST</strong></div>
+                    <div class="panel-body">
+
+                        <div id="leftMenu">						
+					         </div>
+
+                 
+                    </div>
+
+
+                </div>
+
+                <div ng-include="'../pages/fb.htm'"></div>
+            </div>
+
+
+
+        </div>
+        <!--/left-->
+
+        <!--center-->
+        <div class="col-xs-12 col-sm-6  col-md-6" style="padding-left:2px ; padding-right:2px ">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+
+                        <div class="panel-body">
+                            <div class="mainParaHeding"> Restful Java Client (Jersey) - GET & POST XML Data </div>
+                            <h1 style="display: none;"> Restful Java Client (Jersey) - GET & POST XML Data </h1>
+                            <hr class="mainHeading">
+
+
+
+
+                            <p>
+                                In this tutorial we will see how to develop Java client to <strong>GET</strong> and <strong>POST</strong> data to RESTful Web Services that consume/produces XML data. we will use <strong>Jersey 1.8 Client API</strong> for HTTP-based RESTful Web Services.
+                                <p>
+
+
+                                    <p>
+                                        <strong>1. Project Structure </strong>
+                                    </p>
+                                    <p>We are using the above example (<a href="jerseyXML.htm" class="myancor"> REST Example - Produce XML : REST-RS (Jersey) + JAXB </a>) only to demonstrate how to develop Java client</p>
+                                    <p> Here we will create new client Java class in different package to GET and POST XML data and we are adding one more method in 'StudentService.java' class to consume XML. </p>
+
+                                    <p>
+                                        <div class="imgBox">
+                                            <img class="img-responsive" src="img/XMlClientProjectStru.png" alt="dirStructor" title="jersey-hello-world" style="padding-left:15%;">
+                                        </div>
+                                    </p>
+                                    </br>
+
+                                    <p>
+                                        <strong>2. POM.xml : Project Dependencies : Jersey 1.8 Client </strong>
+                                    </p>
+                                    <p>
+                                        To develop client , we have to add 'jersey-client.jar' in your project. Add the 'jersey-client' Dependencies in your pom.xml.
+                                    </p>
+
+                                    <p>In this demo we are using jersey client 1.8 version.</p>
+
+                                    <p>
+                                        <div class="command">
+                                            <pre class="brush: xml; gutter: false;" style=" overflow-y: hidden !important; ">
+<project ...>
+	<dependencies>
+	
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>1.8</version>
+		</dependency>
+		
+		<dependency>
+	        <groupId>com.sun.jersey</groupId>
+	        <artifactId>jersey-client</artifactId>
+ 	        <version>1.8</version>
+        </dependency>
+
+
+	</dependencies>
+	
+</project>
+</pre>
+
+                                        </div>
+                                    </p>
+                                    </br>
+
+                                    <p>
+                                        <strong>3. StudentService Class </strong>
+                                    </p>
+                                    <p>
+                                        Now We will see the Service class that will produce xml with Jersey as response.
+                                    </p>
+
+                                    <p>
+                                        <div class="command">
+                                            <pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+package com.techtutorial.rest;
+
+import java.util.List;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+@Path("/StudentService")
+public class StudentService {
+	
+	StudentDao studentDao = new StudentDao();
+	
+	@GET
+	@Path("/student")
+	@Produces(MediaType.APPLICATION_XML)
+	public Student getStudent() {
+		 
+		return studentDao.getStudent();
+ 
+	}
+	
+	@GET
+	@Path("/students")
+	@Produces(MediaType.APPLICATION_XML)
+	public List&lt;Student&gt; getStudents() {
+		
+		return studentDao.getStudents();
+ 
+	}
+	
+	@POST
+	@Path("/update")
+	@Consumes(MediaType.APPLICATION_XML)
+	public Response consumeXML( Student student ) {
+
+		String output = student.toString();
+
+		return Response.status(200).entity(output).build();
+	}
+}
+</pre>
+
+                                        </div>
+                                    </p>
+
+                                    </br>
+
+                                    <p>
+                                        <strong>4. Jersey Client TO GET the XML Data : ClientJerseyGet.java </strong>
+                                    </p>
+                                    <p> This is java client developed using Jersey API to sent GET Request TO restful Web Service.</p>
+
+                                    <p>
+                                        <div class="command">
+                                            <pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+
+package com.techtutorial.rest.client;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+
+public class ClientJerseyGet {
+
+	public static void main(String[] args) {
+
+		try {
+
+			Client client = Client.create();
+		    String restUrl="http://localhost:8080/RestJerseyClientXML/rest/StudentService/student";
+			WebResource webResource = client.resource(restUrl);
+
+			ClientResponse response = webResource.accept("application/xml")
+					.get(ClientResponse.class);
+			String output = response.getEntity(String.class);
+
+			System.out.println("Server response : " + response.getStatus());
+			System.out.println();
+			System.out.println(output);
+
+			if (response.getStatus() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ response.getStatus());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+</pre>
+
+                                        </div>
+                                    </p>
+
+                                    <p>Output :</p>
+
+                                    <p>
+                                        <div class="command">
+                                            <pre class="brush: xml; gutter: false;" style=" overflow-y: hidden !important; ">
+Server response : 200
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+		<student id="1">
+		   <address>India</address>
+		   <name>Jami</name>
+		</student>
+</pre>
+
+                                        </div>
+                                    </p>
+
+                                    </br>
+
+                                    <p>
+                                        <strong>5. Jersey Client TO POST the XML Data : ClientJerseyPost.java </strong>
+                                    </p>
+                                    <p> This is java client developed using Jersey API to sent POST the XML data Object to restful Web Service.</p>
+
+                                    <p>
+                                        <div class="command">
+                                            <pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+
+package com.techtutorial.rest.client;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.techtutorial.rest.Student;
+
+public class ClientJerseyPost {
+
+	public static void main(String[] args) {
+
+		try {
+
+			Student student = new Student();
+			student.setName("JON");
+			student.setAddress("Paris");
+			student.setId(5);
+
+		    String resturl = "http://localhost:8080/RestJerseyClientXML/rest/StudentService/update";
+			Client client = Client.create();
+			WebResource webResource = client.resource(resturl);
+
+			ClientResponse response = webResource.accept("application/xml")
+					.post(ClientResponse.class, student);
+			String output = response.getEntity(String.class);
+
+			System.out.println("Server response : " + response.getStatus());
+			System.out.println();
+			System.out.println(output);
+
+			if (response.getStatus() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ response.getStatus());
+			}
+
+		} catch (Exception e) {
+
+		}
+	}
+
+}
+
+</pre>
+
+                                        </div>
+                                    </p>
+
+                                    <p>Output :</p>
+
+                                    <p>
+                                        <div class="command">
+                                            <pre class="brush: xml; gutter: false;" style=" overflow-y: hidden !important; ">
+Server response : 200
+
+Name : JON Address : Paris ID : 5
+</pre>
+
+                                        </div>
+                                    </p>
+
+
+
+                                    <br/>
+
+                                    <p><strong>Download This Project</strong></p>
+                                    <p> You can import the Rest Project as maven project in eclipse.
+                                    </p>
+                                    <p> or you can directly use maven commend to build the war file and deploy on tomcat server.
+                                    </p>
+                                    <p>Go to project directory "RestJerseyClientXML" and run mvn commend as: this will create target folder and generate war file</p>
+                                    <p>
+                                        <div class="command">
+                                            mvn clean install
+                                        </div>
+                                    </p>
+                                    <a target="_self" href="../SampleCodes/RestDemo/RestJerseyClientXML.zip">
+                                        <button type="button" class="btn btn-success">
+                                            <span class="glyphicon glyphicon-download-alt">
+		  </span> &nbsp; &nbsp; RestJerseyClientXML.zip &nbsp; &nbsp;
+                                        </button>
+                                    </a>
+
+
+
+                                    <ul class="pager">
+                                        <li class="previous"><a href="jerseyXML.htm">Previous</a></li>
+                                        <li class="next "><a href="JAX-RSAnnotations.htm">Next</a></li>
+                                    </ul>
+                                </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                 * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                 */
+
+                var disqus_config = function() {
+                    this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = 10; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document,
+                        s = d.createElement('script');
+
+                    s.src = '//entityclass.disqus.com/embed.js';
+
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+
+            </script>
+
+            <hr>
+
+
+
+        </div>
+        <!--/center-->
+
+        <!--right-->
+        <div class="col-xs-5 col-sm-3  col-md-3" style="padding-left:2px ; padding-right:2px">
+            <div>
+               
+ <div ng-include="'../pages/rightPannel.htm'"></div>
+
+
+
+            </div>
+        </div>
+        <!--/right-->
+       
+    </div>
+    <!--/container-fluid-->
+
+    <div id="footer">
+        <div ng-include="'../pages/footer.html'"></div>
+    </div>
+
+    <!-- Bootstrap Core JavaScript -->
+
+    
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/myNoteApp.js"></script>
+    <script src="../js/myNoteCtrl.js"></script>
+
+
+
+</body>
+
+</html>

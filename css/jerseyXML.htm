@@ -1,0 +1,474 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>REST Example - Produce XML : REST-RS (Jersey) + JAXB </title>
+
+	<meta name="keywords" content="Entity Class, REST tutorial, beginner REST tutorial, JERSEY , RestEasy, REST-RS (Jersey) + JAXB, Produce xml" />
+    <meta name="description" content="Using Jersey and JAXB to create restful service that will produce xml as response." />
+	<meta name="robots" content="index, follow">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+	 <link rel="stylesheet" href="../css/style.css">
+<link rel="shortcut icon" href="../img/EcLogo.png">
+
+
+
+</head>
+
+<body  ng-app="" >
+
+<div style="margin-bottom:5%;">
+<div ng-include="'../pages/header.htm'"></div>
+</div>
+
+	
+   <div class="container-fluid" style="padding-right:0px; padding-left:0px">
+  
+  <!--left-->
+  <div class="col-xs-12 col-sm-3 col-md-3 " style="padding-left:4px ; padding-right:2px" >
+       <div class="panel-group">
+    	<div class="panel panel-default">
+         	
+			<div class="panel-heading" ><strong>REST</strong></div>
+<div class="panel-body">
+
+            <nav id="navigation">
+                <ul style="padding-left:0%;">
+                   
+
+                 <div class="listHeading" >INTRODUCTION TO REST </div>
+					
+					<div >
+                   
+				   <a class="leftMenulink" href="home.htm">  <div class="leftMenuActiveDIV">  <li class="leftMenuinActive">What is Web Service</li></div></a>
+                   <a class="leftMenulink" href="rest.htm" > <div class="leftMenuActiveDIV">  <li class=" leftMenuinActive ">REST</li></div></a>
+                   <a class="leftMenulink" href="jaxRX.htm">  <div class="leftMenuActiveDIV">  <li class="leftMenuinActive">JAX-RS</li></div></a>
+                   
+					
+					</div>
+
+                </ul>
+				
+					<ul style="padding-left:0%;">
+				    <div class="listHeading" >JAX-RS JERSEY </div>
+					<div >
+				    <a class="leftMenulink" href="jerseyHome.htm"> <div class="leftMenuActiveDIV"> <li class=" leftMenuinActive">REST Example - Hello Web Service </li></div></a>
+					 <a class="leftMenulink" href="jerseyJSON.htm"><div class="leftMenuActiveDIV"> <li class=" leftMenuinActive" >REST Example - Produce JSON </li></div></a>
+					 <a class="leftMenulink" href="jerseyXML.htm"> <div class="leftMenuActiveDIV"> <li class=" leftMenuActive" >REST Example - Produce XML </li></div></a>
+            		</div>					
+					</ul>
+            </nav>
+			<hr>
+			</div>
+
+			
+        </div>
+		
+
+      </div>
+       
+
+
+  </div>
+  <!--/left-->
+  
+  <!--center-->
+  <div class="col-xs-12 col-sm-6  col-md-6" style="padding-left:2px ; padding-right:2px ">
+    <div class="row" >
+      <div class="col-xs-12" >
+        <div class="panel panel-default"  >
+			
+			<div class="panel-body">
+			<div class="mainParaHeding"> REST Example - Produce XML : REST-RS (Jersey) + JAXB </div>
+			<h1 style="display: none;"> REST Example - Produce XML : REST-RS (Jersey) + JAXB</h1>
+			<hr class="mainHeading" >
+			
+        <p>
+		  In this tutorial we are using <a href="https://jersey.java.net/" style="color:blue" target="_blank"> Jersey </a>and 
+		  <a href="https://jaxb.java.net/" style="color:blue" target="_blank"> JAXB </a>(Java Architecture for XML Binding) to create restful service that will produce xml as response.
+		  JAXB is library used for marshal a Java Object to XML, and ummarshal an XML file to Java Object.
+		  Here we are not creating JAX-RS application from top to bottom, just we will see main part to create XML response.
+		 
+	    </p>
+           <p> To create REST application form starting read <a href="jerseyHome.htm" style="color:blue">  REST Example - First Hello Web Service </a> </p> 
+     
+	 <br/>
+	<p> <strong>1. Project Structure </strong>
+	</p>
+	<p> In this project (RestXMlDemo) we have defined proper REST project structure like from Student Entity Class , DAO class and Service Class.</p>
+	<p> Student is Model or Entity Class. DAO(Data Access Object) class is where we can write all data access operation for 
+	Student Object like get Student , save Student or find particular Student. StudentServce Class use the DAO class method and exposed as service.
+	<p>
+		<div class="imgBox">
+		<img class="img-responsive" src="img/XMLRestProjectStr.png" alt="dirStructor" title="jersey-hello-world" style="padding-left:15%;" >
+		</div>
+	</p>
+<br/>
+
+<p>
+		<strong>2. POM.xml : Project Dependencies </strong>
+		</p>
+		
+		<p>
+		
+		You don’t have to add any additional libraries to use JAXB, as long as you use Jersey on your project.
+		
+		</p>
+		<p>In this demo we are using jersey server 1.8 version</p>
+		<p>	
+		<p>
+				<div class="command">
+		<pre class="brush: xml; gutter: false;" style=" overflow-y: hidden !important; ">
+<project ...>
+	<dependencies>
+	
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>1.8</version>
+		</dependency>
+
+	</dependencies>
+	
+</project>
+</pre>
+		
+</div>
+</p>
+   <br/>  
+<p>
+		<strong>3. Student Class </strong>
+		</p>
+<p> 
+
+We have added anotation to our model objects with jaxb annotations so that JAXB can marshal the java object into XML representation to be sent to client for that API.
+
+In Student Model class we have used follwing jaxb annotations.
+<ul>
+<li><strong>@XmlRootElement </strong>:defines the root element of XML.</li>
+<li><strong>@XmlAttribute</strong>: define an attribute of the root element.</li>
+<li><strong>@XmlElement</strong>:  define element in XML file.</li>
+</ul>
+
+</p>
+
+<p>
+		<div class="command">
+		<pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+package com.techtutorial.rest;
+
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "student")
+public class Student {
+
+	private String name;
+	private String Address;
+	private int id;
+	
+	@XmlElement
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	@XmlElement
+	public String getAddress() {
+		return Address;
+	}
+	
+	public void setAddress(String address) {
+		Address = address;
+	}
+	
+	@XmlAttribute
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+}
+
+</pre>
+		
+</div>
+
+</p>
+
+<p>
+One Student object can be represent into following XML format
+</p>
+
+<p>
+
+				<div class="command">
+		<pre class="brush: xml; gutter: false;" style=" overflow-y: hidden !important; ">
+
+		<student id="1">
+		    <name>jami</name>
+		    <Address>India</Address>
+		</student>
+</pre>
+	
+	
+</div>
+</p>
+
+
+
+
+
+<p>
+		<strong>3. StudentDoa Class </strong>
+</p>
+
+<p>
+Following StudentDoa calss has function that is  been hard coded to show the functionality related to listing down student. 
+Here in DOA class we can implement required business logic where you may get the users or other required data from your database or any other resource.
+</p>
+
+<p>
+		<div class="command">
+			<pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+package com.techtutorial.rest;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class StudentDao {
+
+	public Student getStudent() {
+
+		Student std = new Student();
+		std.setName("Jami");
+		std.setAddress("India");
+		std.setId(1);
+
+		return std;
+
+	}
+	
+	public List<Student> getStudents(){
+		
+		List<Student> stdList = new ArrayList<Student>();
+		
+		Student std1 = new Student();
+		std1.setName("Jami");
+		std1.setAddress("India");
+		std1.setId(1);
+		
+		Student std2 = new Student();
+		std2.setName("Kami");
+		std2.setAddress("USA");
+		std2.setId(2);
+		
+		stdList.add(std1);
+		stdList.add(std2);
+		
+		return stdList;
+		
+	}
+}
+</pre>
+	
+		</div>
+		</p>
+		
+	
+	<p>
+		<strong>3. StudentService Class </strong>
+     </p>
+	 <p>
+	 Now We will see the Service class that will produce xml with Jersey as response.
+	 </p>
+	 
+	 <p>
+		<div class="command">
+			<pre class="brush: java; gutter: false;" style=" overflow-y: hidden !important; ">
+
+package com.techtutorial.rest;
+
+import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/StudentService")
+public class StudentService {
+	
+	StudentDao studentDao = new StudentDao();
+	
+	@GET
+	@Path("/student")
+	@Produces(MediaType.APPLICATION_XML)
+	public Student getStudent() {
+		 
+		return studentDao.getStudent();
+ 
+	}
+	
+	@GET
+	@Path("/students")
+	@Produces(MediaType.APPLICATION_XML)
+	public List<Student> getStudents() {
+		
+		return studentDao.getStudents();
+ 
+	}
+}
+
+</pre>
+	
+		</div>
+		</p>
+		
+		<p>
+		<strong>4. Demo </strong>
+		</p>
+		
+		<p>
+		URL: <strong> localhost:8080/RestXMLDemo/rest/StudentService/student </strong>
+		</p>
+		
+		<p>
+		In this example, web request from “RestXMLDemo/rest/StudentService/student” will match to "StudentService", via @Path("/StudentService").
+		</p>
+		<p>
+		Then it matches with the method "getStudent" via @Path("/student"). It will produce xml for one student instance.
+		</p>
+		
+		
+		
+		<p>
+		  <div class="imgBox">
+		<img class="img-responsive" src="img/XMLStudent.png" alt="XMLresponse" title="jersey-hello-world" style="padding-left:1%;" >
+		</div>
+		</p>
+		
+			<p>
+		URL: <strong> localhost:8080/RestXMLDemo/rest/StudentService/students</strong>
+		</p>
+		<p>
+		This is another method that will return list of students as xml 
+		
+		</p>
+		<p>
+		  <div class="imgBox">
+		<img class="img-responsive" src="img/XMLStudents.png" alt="XMLresponse" title="jersey-hello-world" style="padding-left:1%;" >
+		</div>
+		</p>
+		
+		
+				<br/>
+		
+		<p><strong>Download This Project</strong></p>
+		<p> You can import the Rest Project as maven project in eclipse.
+		</p>
+		<p> or you can directly use maven commend to build the war file and deploy on tomcat server.
+		</p>
+		<p>Go to project directory "RestXMLDemo" and run mvn commend as: this will create target folder and generate war file</p>
+		<p>
+		<div  class="command">
+		mvn clean install
+		</div>
+		</p>
+	<a target="_self" href="../SampleCodes/RestDemo/RestXMLDemo.zip"> 
+		<button type="button" class="btn btn-success">
+		  <span class="glyphicon glyphicon-download-alt">
+		  </span>
+        &nbsp; &nbsp; RestXMLDemo.zip &nbsp; &nbsp;
+        </button>
+	</a>
+
+	
+		<p>
+  <ul class="pager">
+    <li class="previous"><a href="jerseyJSON.htm">Previous</a></li>
+    <li class="next disabled"><a href="jerseyHome.htm">Next</a></li>
+  </ul>
+</p>
+        
+</div>
+		  </div>     
+	 </div>
+    </div>
+    <hr>
+
+	
+	<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = 2; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//entityclass.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+<hr>
+	
+	
+
+  </div>
+  <!--/center-->
+
+  <!--right-->
+  <div class="col-xs-5 col-sm-3  col-md-3" style="padding-left:2px ; padding-right:2px" >
+<div >
+     <div ng-include="'poll.htm'"></div>
+
+     <hr>
+  </div>
+  </div><!--/right-->
+  <hr>
+</div><!--/container-fluid-->
+
+ <div id="footer">
+	 <div ng-include="'../pages/footer.html'"></div>      
+ </div>
+
+    <!-- Bootstrap Core JavaScript -->
+	
+   <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+  	<script src="../js/angular.min.js"></script>
+    <script src="../js/myNoteApp.js"></script>
+    <script src="../js/myNoteCtrl.js"></script>
+	
+  <script type="text/javascript" src="../js/shCore.js"></script>
+	<script type="text/javascript" src="../js/shBrushJava.js"></script>
+	<script type="text/javascript" src="../js/shBrushXml.js"></script>
+	<link type="text/css" rel="stylesheet" href="../css/shCoreDefault.css"/>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+ 
+
+</body>
+
+</html>

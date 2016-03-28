@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		
+						<meta property="og:site_name" content="www.entityclass.in" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta name="author" content="entityclass.in">
+
+<meta property="og:title" content="Rest Tutorial | Jersey | RestEsy| JAX-RS"/>
+
+<meta property="og:url" content="http://www.entityclass.in/rest/rest.htm" />
+<meta property="og:description" content="Using Jersey and Jackson to create restful service that will produce JSON as response. "/>
+    
+	
+	
+    <title>REST</title>
+
+    <meta name="keywords" content="Entity Class, REST tutorial, Beginner REST tutorial, JERSEY Example, REST-RS (Jersey),JAX-RS" />
+    <meta name="description" content="Using Jersey create restful hello world  restful web service " />
+    <meta name="robots" content="index, follow">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../img/EcLogo.png">
+    <script src="../js/jquery.min.js"></script>
+	<script src="../js/entityClass.js"></script>
+	
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+</head>
+
+<body ng-app="">
+
+    <div style="margin-bottom:5%;">
+        <div ng-include="'../pages/header.htm'"></div>
+    </div>
+
+
+    <div class="container-fluid" style="padding-right:0px; padding-left:0px">
+
+        <!--left-->
+        <div class="col-xs-12 col-sm-3 col-md-3 " style="padding-left:4px ; padding-right:2px">
+            <div class="panel-group">
+                <div class="panel panel-default">
+
+                    <div class="panel-heading"><strong>REST</strong></div>
+                    <div class="panel-body">
+
+                            
+							<div id="leftMenu">						
+					         </div>
+				
+                    </div>
+
+
+                </div>
+
+                <div ng-include="'../pages/fb.htm'"></div>
+            </div>
+
+
+
+        </div>
+        <!--/left-->
+
+        <!--center-->
+        <div class="col-xs-12 col-sm-6  col-md-6" style="padding-left:2px ; padding-right:2px ">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+
+                        <div class="panel-body">
+                            <div class="mainParaHeding"> What Is REST </div>
+                            <h1 style="display: none;">  What Is REST </h1>
+                            <hr class="mainHeading">
+                            <p>
+
+
+                                REST stands for <strong>Re</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer.
+                            </p>
+                            <p>
+                                REST is an software architectural style for designing application not a protocol, and typically it uses simple HTTP (but not always ) for data communication which is stateless and client-server protocol .
+                            </p>
+
+                            <p>
+                                REST was initially proposed by Roy Thomas Fielding in 2000
+                            </p>
+
+                            </br>
+
+                            <div class="mainParaHeding">REST Architecture</div>
+                            <hr class="mainHeading">
+                            <p>
+                                In Rest architectural every component is a resource and a resource is accessed by a common interface using HTTP standard methods (GET, POST, PUT, DELETE, etc.). Each resource is identified by URIs (Uniform resource Identifier)/ global IDs. Any client can ask for any of resource using resource URI.
+
+                            </p>
+
+
+
+                            </br>
+
+                            <div class="mainParaHeding">RESTFul WEB Service</div>
+                            <hr class="mainHeading">
+                            <p>
+                                RESTful Web Services are REST architecture based web services.
+                            </p>
+
+                            <p>
+                                RESTful web services are lightweight, highly scalable and maintainable and are very commonly used to create APIs for web based applications. Despite being simple, REST is fully-featured and alternative to mechanisms like RPC (Remote Procedure Calls) and Web Services (SOAP, WSDL, etc.).
+
+                            </p>
+                            Web service developed as rest API can be accessed over http interface by any client developed in any language. Rest API can provide result in different formate in Plain Text, HTML, XML and JSON.
+                            <p>
+
+                                <p>
+                                    RESTful applications typically use HTTP requests to post data (create and/or update - POST/PUT Method), read data (e.g., make queries -GET Method), and delete (DELETE Method)data. Thus, REST uses HTTP for all four CRUD (Create/Read/Update/Delete) operations
+                                </p>
+
+                                <p>
+                                    REST service is
+
+                                    <ol>
+                                        <li>Platform-independent (Server might be Unix/Windows, the client might be a Mac, or anything else) </li>
+                                        <li>Language-independent (java can talk to c++, etc.)</li>
+                                        <li> Standards-based (runs on top of HTTP)</li>
+                                    </ol>
+                                </p>
+                                </br>
+
+                                <h4> HTTP Methods</h4>
+                                <p>
+                                    Following well known HTTP methods are commonly used in REST based architecture.
+                                </p>
+                                <ul>
+                                    <li><strong>GET</strong> - Provides a read only access to a resource.</li>
+                                    <li><strong>POST</strong> - ----------</li>
+                                    <li><strong>PUT</strong> - Used to create a new resource.</li>
+                                    <li><strong>DELETE</strong> - Used to remove a resource.</li>
+                                    <li><strong>OPTIONS</strong> - Used to get the supported operations on a resource.</li>
+                                </ul>
+
+                            </p>
+
+                            <p>
+                                <ul class="pager">
+                                    <li class="previous"><a href="home.htm">Previous</a></li>
+                                    <li class="next"><a href="jaxRX.htm">Next</a></li>
+                                </ul>
+                            </p>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                 * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                 */
+
+                var disqus_config = function() {
+                    this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = 5; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document,
+                        s = d.createElement('script');
+
+                    s.src = '//entityclass.disqus.com/embed.js';
+
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+
+            </script>
+
+            <hr>
+
+        </div>
+        <!--/center-->
+
+        <!--right-->
+        <div class="col-xs-5 col-sm-3  col-md-3" style="padding-left:2px ; padding-right:2px">
+            <div>
+                <div ng-include="'../pages/rightPannel.htm'"></div>
+			   
+            </div>
+        </div>
+        <!--/right-->
+       
+    </div>
+    <!--/container-fluid-->
+
+    <div id="footer">
+        <div ng-include="'../pages/footer.html'"></div>
+    </div>
+
+    <!-- Bootstrap Core JavaScript -->
+
+
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/myNoteApp.js"></script>
+    <script src="../js/myNoteCtrl.js"></script>
+
+
+
+
+</body>
+
+</html>
